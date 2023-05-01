@@ -2,3 +2,4 @@
 
 > Status: Developing ⚠️
 
+### Isto é um projeto de desenvolvimento embarcado baseado na plataforma ESP32
