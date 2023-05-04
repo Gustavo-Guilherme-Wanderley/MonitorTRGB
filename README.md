@@ -31,3 +31,7 @@
 + Finalmente, você pode enviar o valor da balança para o Blink Cloud usando a biblioteca Blink.h. Certifique-se de que sua conta Blink esteja configurada corretamente e obtenha suas credenciais de API.
 
 + Envie o valor da balança para o Blink Cloud usando a função Blink.publish(). Certifique-se de que o valor seja enviado em um formato que possa ser lido pelo Blink Cloud.
+
+## Protótipo físico
+
+
