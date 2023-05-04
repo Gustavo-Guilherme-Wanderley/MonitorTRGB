@@ -13,7 +13,7 @@
 + Células de carga
 + Display
 
-## Para fazer uma balança com ESP32, HX711, células de carga e Blink Cloud para ler o peso e enviar o valor para o Blink Cloud, você precisará seguir algumas etapas.
+## Você precisará seguir algumas etapas.
 
 + Primeiro, você precisará de um ESP32, uma placa microcontroladora com WiFi integrado que pode ser programada usando a linguagem de programação Arduino. Você também precisará de uma célula de carga e um amplificador HX711 para converter o sinal analógico da célula de carga em um sinal digital que possa ser lido pelo ESP32.
 
