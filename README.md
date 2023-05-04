@@ -34,4 +34,7 @@
 
 ## Protótipo físico
 
+<img src="https://user-images.githubusercontent.com/77367556/236104437-072ee360-49c5-4a3a-b271-420aaec134cf.jpg" width="480">
+
+
 
