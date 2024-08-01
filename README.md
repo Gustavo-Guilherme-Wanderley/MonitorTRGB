@@ -130,3 +130,41 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(HX711_dout), dataReadyISR, FALLING);
 }
 ```
+### Loop Principal
+```
+void loop() {
+  Blynk.run();
+  
+  const int serialPrintInterval = 500; // increase value to slow down serial print activity
+
+  // get smoothed value from the dataset:
+  if (newDataReady) {
+    if (millis() > t + serialPrintInterval) {
+      i = LoadCell.getData();
+      newDataReady = 0;
+      Serial.print("Load_cell output val: ");
+      p = i / 1000;
+      Serial.println(p);  
+      lcd.clear(); 
+      lcd.print(p);
+      lcd.print(" Kg");
+      Blynk.virtualWrite(V0, p);      
+      // Serial.print("  ");
+      // Serial.println(millis() - t);
+      t = millis();
+    }
+  }
+
+  // receive command from serial terminal, send 't' to initiate tare operation:
+  if (Serial.available() > 0) {
+    char inByte = Serial.read();
+    if (inByte == 't') LoadCell.tareNoDelay();
+  }
+
+  // check if last tare operation is complete
+  if (LoadCell.getTareStatus() == true) {
+    Serial.println("Tare complete");
+  }
+}
+```
+> Em breve mais melhorias na documentação!
