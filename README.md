@@ -1,42 +1,70 @@
-<h1>MonitorTRGB (Monitoramento em tempo real de gás do botijão)</h1>
-
+# MonitorTRGB (Monitoramento em Tempo Real de Gás do Botijão)
 
 <img src="https://user-images.githubusercontent.com/77367556/235567022-f3dd2792-9bad-4b84-8a0c-21cdb4caf1b5.jpeg" width="480">
-> Status: Developing ⚠️
 
-### Isto é um projeto de desenvolvimento embarcado baseado na plataforma ESP32
+> Status: Em desenvolvimento ⚠️
 
-## Componentes utilizados:
+### Este é um projeto de desenvolvimento embarcado baseado na plataforma ESP32.
 
-+ Esp32
-+ Módulo Hx711
-+ Células de carga
-+ Display
+## Componentes Utilizados
 
-## Você precisará seguir algumas etapas.
+- ESP32
+- Módulo HX711
+- Células de carga
+- Display LCD
 
-+ Primeiro, você precisará de um ESP32, uma placa microcontroladora com WiFi integrado que pode ser programada usando a linguagem de programação Arduino. Você também precisará de uma célula de carga e um amplificador HX711 para converter o sinal analógico da célula de carga em um sinal digital que possa ser lido pelo ESP32.
+## Pinagem
 
-+ Conecte a célula de carga ao amplificador HX711. A célula de carga terá quatro fios: vermelho, preto, branco e verde. Conecte o fio vermelho ao pino E+ do amplificador HX711, o fio preto ao pino E- do amplificador HX711, o fio branco ao pino A+ do amplificador HX711 e o fio verde ao pino A- do amplificador HX711.
-<img src="https://user-images.githubusercontent.com/77367556/236104105-93fa12cd-73af-4bf2-aca2-544296846c40.png" width="480">
+| Componente      | Pino        | Conexão ESP32 |
+|-----------------|-------------|---------------|
+| Célula de carga | Vermelho (E+)| HX711 E+      |
+| Célula de carga | Preto (E-)   | HX711 E-      |
+| Célula de carga | Branco (A+)  | HX711 A+      |
+| Célula de carga | Verde (A-)   | HX711 A-      |
+| HX711           | DT           | GPIO 33       |
+| HX711           | SCK          | GPIO 27       |
+| Display LCD     | SDA          | GPIO 21       |
+| Display LCD     | SCL          | GPIO 22       |
 
-+ Conecte o amplificador HX711 ao ESP32. Conecte o pino DT do amplificador HX711 ao pino D5 do ESP32 e o pino SCK do amplificador HX711 ao pino D6 do ESP32.
+## Instruções
 
-+ Agora você pode começar a programar o ESP32 para ler o valor da célula de carga. Você precisará usar uma biblioteca de código aberto chamada HX711.h para se comunicar com o amplificador HX711. Esta biblioteca pode ser baixada e instalada usando o gerenciador de bibliotecas da IDE do Arduino.
+1. **Preparação do Hardware:**
+   - Conecte a célula de carga ao amplificador HX711 conforme descrito na tabela de pinagem.
+   - Conecte o amplificador HX711 ao ESP32 usando os pinos DT e SCK conforme descrito.
+   - Conecte o display LCD ao ESP32 usando os pinos SDA e SCL conforme descrito.
 
-+ Em seguida, você precisará configurar o ESP32 para se conectar ao WiFi usando a biblioteca WiFi.h. Certifique-se de que seu ESP32 esteja conectado a uma rede WiFi.
+2. **Configuração do Ambiente de Desenvolvimento:**
+   - Instale a IDE Arduino.
+   - Instale as bibliotecas necessárias: `HX711_ADC`, `WiFi`, `Blynk`, e `LiquidCrystal_I2C` através do gerenciador de bibliotecas da IDE Arduino.
 
-+ Agora você pode começar a ler o valor da célula de carga usando a função HX711.read(). Você precisará calibrar a balança para garantir que ela esteja lendo o valor correto da célula de carga. Isso pode ser feito pesando um objeto conhecido e ajustando o valor da balança até que corresponda ao peso conhecido.
+3. **Programação do ESP32:**
+   - Configure o ESP32 para se conectar ao WiFi utilizando a biblioteca `WiFi.h`.
+   - Utilize a biblioteca `HX711.h` para ler os valores da célula de carga.
+   - Calibre a balança utilizando um objeto de peso conhecido.
+   - Envie os valores para o Blink Cloud utilizando a biblioteca `Blink.h`.
 
-+ Finalmente, você pode enviar o valor da balança para o Blink Cloud usando a biblioteca Blink.h. Certifique-se de que sua conta Blink esteja configurada corretamente e obtenha suas credenciais de API.
-
-+ Envie o valor da balança para o Blink Cloud usando a função Blink.publish(). Certifique-se de que o valor seja enviado em um formato que possa ser lido pelo Blink Cloud.
-
-## Protótipo físico
+## Protótipo Físico
 
 <img src="https://user-images.githubusercontent.com/77367556/236104437-072ee360-49c5-4a3a-b271-420aaec134cf.jpg" width="480">
 
 > Em breve mais informações ⚠️
 
+## Código
 
+### Configuração Inicial
 
+```cpp
+#define BLYNK_TEMPLATE_ID "TMPL-zfaCATI"
+#define BLYNK_DEVICE_NAME "Monitor de Peso"
+#define BLYNK_AUTH_TOKEN "" // Seu Token de autenticação
+
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+
+char auth[] = BLYNK_AUTH_TOKEN;
+
+// Suas credenciais de WIFI
+// Login e Senha
+char ssid[] = "";
+char pass[] = "";
